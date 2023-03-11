@@ -1,0 +1,2 @@
+const e=document.querySelector(".search-form");e.addEventListener("submit",(function(o){o.preventDefault();const a=e.searchQuery.value;t(a).then((e=>console.log(e))).catch((e=>console.log(e)))}));const t=async e=>(await fetch(`https://pixabay.com/api/?key=34316934-23a1792d471904186ea8894b3&q=${e}&image_type="photo"&orientation="horizontal"&safesearch="true"`)).json();
+//# sourceMappingURL=01-color-switcher.f0fa04a2.js.map
