@@ -18,3 +18,12 @@ img {
 }
 
 
+.gallery{
+  display: flex;
+  flex-wrap: wrap;
+   gap: 10px;
+  /* justify-items: stretch;
+  align-items: stretch; */ 
+  /* grid-template-columns: repeat(auto-fit,minmax(250px,)); */
+  /* width: calc((100% - 90px) / 4); */
+}

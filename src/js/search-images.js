@@ -1,6 +1,11 @@
+import { fetchPictures } from "./api";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-const API_KEY = "34316934-23a1792d471904186ea8894b3";
-const URL = "https://pixabay.com/api/"
+
+
+let page = 1;
+let hits = [];
+let query = '';
+let total = 0;
 
 
 
@@ -13,58 +18,59 @@ const galery = document.querySelector('.gallery')
 form.addEventListener('submit', onSearchClick);
 
 
-const render = (images) => {
-  const markup = images.map((image) => `<div class="photo-card">
-  <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
+const render = () => {
+  galery.innerHTML = '';
+  const markup = hits.map((hit) => `<div class="photo-card">
+  <img src="${hit.webformatURL}" alt="${hit.tags}" width="220" height="200" loading="lazy" />
   <div class="info">
     <p class="info-item">likes
-      <b>${image.likes}</b>
+      <b>${hit.likes}</b>
     </p>
     <p class="info-item">views
-      <b>${image.views}</b>
+      <b>${hit.views}</b>
     </p>
     <p class="info-item">comments
-      <b>${image.comments}</b>
+      <b>${hit.comments}</b>
     </p>
     <p class="info-item">downloads
-      <b>${image.downloads}</b>
+      <b>${hit.downloads}</b>
     </p>
   </div>
 </div>`)
     .join('');
-  galery.innerHTML = '';
+  
   galery.innerHTML = markup;
 }
 
 function onSearchClick(e) {
     e.preventDefault()
-    const inputValue = form.searchQuery.value
+   inputValue = form.searchQuery.value
     // console.log(form.searchQuery.value);
-  fetchPictures(inputValue)
+  if (!inputValue || inputValue === query) {
+    return
+  }
+  query = inputValue;
+  fetchPictures(query,page)
     .then(data => {
-      console.log(data.length);
-      if (!data.length) {
+      // const { hits, totalHits, total } = data;
+      hits = data.hits;
+      total = data.totalHits;
+      // console.log(hits);
+      // console.log(totalHits);
+      console.log(total);
+      if (!hits.length) {
         Notify.failure('Sorry, there are no images matching your search query. Please try again.')
         return;
       }
     
       // console.log(data),
-      render(data)
+      render()
     })
   .catch(error => console.log(error));
     // fetchUsers().then(users => console.log(users))
 }
 
-const fetchPictures = async (request) => {
-  const response = await fetch(`${URL}?key=${API_KEY}&q=${request}&image_type="photo"&orientation="horizontal"&safesearch="true"`);
-  if (response.ok) {
-    
-    const images = response.json();
-  return images.then(data => data.hits)
-  }
-  
-throw new Error(response.status)
-}
+
 
 // const fetchUsers = async () => {
 //   const response = await fetch("https://pixabay.com/api/?key=34316934-23a1792d471904186ea8894b3&q=yellow+flowers&image_type=photo");
