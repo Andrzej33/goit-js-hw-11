@@ -1,4 +1,4 @@
-import { fetchPictures } from "./api";
+import { getData } from "./api";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 
@@ -15,13 +15,17 @@ let total = 0;
 
 const form = document.querySelector('.search-form')
 const galery = document.querySelector('.gallery')
-form.addEventListener('submit', onSearchClick);
+const loadBtn = document.querySelector('.load-more')
 
+
+
+form.addEventListener('submit', onSearchClick);
+loadBtn.addEventListener('click',onBtnClick)
 
 const render = () => {
-  galery.innerHTML = '';
+  
   const markup = hits.map((hit) => `<div class="photo-card">
-  <img src="${hit.webformatURL}" alt="${hit.tags}" width="220" height="200" loading="lazy" />
+  <img src="${hit.webformatURL}" alt="${hit.tags}" width="120" height="150" loading="lazy" />
   <div class="info">
     <p class="info-item">likes
       <b>${hit.likes}</b>
@@ -39,18 +43,12 @@ const render = () => {
 </div>`)
     .join('');
   
-  galery.innerHTML = markup;
+  // galery.innerHTML = markup;
+  galery.insertAdjacentHTML('beforeend',markup)
 }
 
-function onSearchClick(e) {
-    e.preventDefault()
-   inputValue = form.searchQuery.value
-    // console.log(form.searchQuery.value);
-  if (!inputValue || inputValue === query) {
-    return
-  }
-  query = inputValue;
-  fetchPictures(query,page)
+const fetchPictures = () => {
+getData(query,page)
     .then(data => {
       // const { hits, totalHits, total } = data;
       hits = data.hits;
@@ -67,6 +65,21 @@ function onSearchClick(e) {
       render()
     })
   .catch(error => console.log(error));
+}
+
+
+function onSearchClick(e) {
+    e.preventDefault()
+  //  inputValue = form.searchQuery.value
+  const inputValue = e.currentTarget.elements.searchQuery.value
+    // console.log(form.searchQuery.value);
+  if (!inputValue.trim() || inputValue === query) {
+    return
+  }
+  query = inputValue;
+  page = 1;
+  galery.innerHTML = '';
+  fetchPictures()
     // fetchUsers().then(users => console.log(users))
 }
 
@@ -78,3 +91,7 @@ function onSearchClick(e) {
 //   return users;
 // };
 
+function onBtnClick () {
+  page += 1;
+  fetchPictures()
+}
