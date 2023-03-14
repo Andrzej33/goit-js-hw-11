@@ -10,7 +10,7 @@ let query = '';
 let total = 0;
 
 
-var lightbox = new SimpleLightbox('.gallery a', { /* options */ });
+// var lightbox = new SimpleLightbox('.gallery a', { /* options */ });
 
 
 
@@ -21,7 +21,7 @@ const loadBtn = document.querySelector('.load-more');
 
 
 
-const simpleGallery = new SimpleLightbox('.gallery a',{});
+const simpleGallery = new SimpleLightbox('.gallery a', { captionDelay:300,});
 
 
 hideBtn()
@@ -59,6 +59,7 @@ const render = () => {
 }
 
 const fetchPictures = () => {
+  page = Number(page)
 getData(query,page)
     .then(data => {
       // const { hits, totalHits, total } = data;
@@ -83,16 +84,17 @@ getData(query,page)
 
 function onSearchSubmit(e) {
   e.preventDefault()
-  hideBtn()
+  // hideBtn()
   
   //  inputValue = form.searchQuery.value
   const inputValue = e.currentTarget.elements.searchQuery.value
     // console.log(form.searchQuery.value);
   if (inputValue.trim() === '') {
     galery.innerHTML = '';
-  // hideBtn()
+  hideBtn()
   }  if
-  (!inputValue.trim() || inputValue === query){
+    (!inputValue.trim() || inputValue === query) {
+    
     return
   }
   
@@ -127,7 +129,7 @@ function hideBtn() {
 
 function checkDataLength(itemsLength,totalAmount) {
   if (!itemsLength) {
-  
+  hideBtn()
     Notify.failure('Sorry, there are no images matching your search query. Please try again.')
     return;
   }
