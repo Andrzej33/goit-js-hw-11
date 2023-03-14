@@ -27,3 +27,11 @@ img {
   /* grid-template-columns: repeat(auto-fit,minmax(250px,)); */
   /* width: calc((100% - 90px) / 4); */
 }
+
+.load-more{
+  display: block;
+}
+
+.load-more.is-hidden {
+  display: none;
+}
