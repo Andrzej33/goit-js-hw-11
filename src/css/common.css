@@ -19,13 +19,35 @@ img {
 
 
 .gallery{
+  margin-top: 30px;
+  margin-bottom: 20px;
   display: flex;
   flex-wrap: wrap;
    gap: 10px;
   /* justify-items: stretch;
   align-items: stretch; */ 
   /* grid-template-columns: repeat(auto-fit,minmax(250px,)); */
-  /* width: calc((100% - 90px) / 4); */
+ 
+}
+
+.photo-card{
+  height: 100%;
+}
+.imageLink{
+  height: 200px;
+  display: block;
+  text-decoration: none;
+width: calc((100% - 30px) / 4);
+}
+
+.info-item{
+  padding: 0px;
+  margin: 0px;
+  color: aquamarine;
+  font-style: normal;
+    font-size: 12px;
+    line-height: 1.9;
+    letter-spacing: .03em;
 }
 
 .load-more{
@@ -35,3 +57,6 @@ img {
 .load-more.is-hidden {
   display: none;
 }
+
+
+

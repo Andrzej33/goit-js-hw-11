@@ -1,4 +1,5 @@
 import { getData } from "./api";
+// const axios = require('axios')
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
@@ -7,10 +8,10 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 let page = 1;
 let hits = [];
 let query = '';
-let total = 0;
+// let total = 0;
 
 
-// var lightbox = new SimpleLightbox('.gallery a', { /* options */ });
+
 
 
 
@@ -33,7 +34,7 @@ loadBtn.addEventListener('click',onBtnClick)
 
 const render = () => {
   
-  const markup = hits.map((hit) => `<a class="image-link" href="${hit.largeImageURL}"><div class="photo-card">
+  const markup = hits.map((hit) => `<a class="imageLink" href="${hit.largeImageURL}"><div class="photo-card">
     <img src="${hit.webformatURL}" alt="${hit.tags}"
     title="${hit.tags}" width="120" height="100" loading="lazy" />
     <div class="info">
@@ -61,21 +62,17 @@ const render = () => {
 const fetchPictures = () => {
   page = Number(page)
 getData(query,page)
-    .then(data => {
-      // const { hits, totalHits, total } = data;
+  .then(data => {
+    
       hits = data.hits;
       total = data.totalHits;
       const length = hits.length;
-      // console.log(hits.length);
-      console.log(length);
+      
+      console.log(total);
       console.log(hits);
-      // if (!length) {
-      //   hideBtn()
-      //   Notify.failure('Sorry, there are no images matching your search query. Please try again.')
-      //   return;
-      // }
+      
     checkDataLength(length,total)
-      // console.log(data),
+     
       render()
     })
   .catch(error => console.log(error));
@@ -84,11 +81,9 @@ getData(query,page)
 
 function onSearchSubmit(e) {
   e.preventDefault()
-  // hideBtn()
-  
-  //  inputValue = form.searchQuery.value
+ 
   const inputValue = e.currentTarget.elements.searchQuery.value
-    // console.log(form.searchQuery.value);
+   
   if (inputValue.trim() === '') {
     galery.innerHTML = '';
   hideBtn()
@@ -145,3 +140,13 @@ function checkDataLength(itemsLength,totalAmount) {
     Notify.success(`Hooray! We found ${totalAmount} images.`)
   }
 }
+
+
+const { height: ImageLink } = document
+  .querySelector(".gallery")
+  .firstElementChild.getBoundingClientRect();
+
+window.scrollBy({
+  top: ImageLink * 2,
+  behavior: "smooth",
+});
