@@ -36,19 +36,23 @@ const render = () => {
   
   const markup = hits.map((hit) => `<a class="imageLink" href="${hit.largeImageURL}"><div class="photo-card">
     <img src="${hit.webformatURL}" alt="${hit.tags}"
-    title="${hit.tags}" width="120" height="100" loading="lazy" />
+    title="${hit.tags}" width="250"  loading="lazy" />
     <div class="info">
-      <p class="info-item">likes
-        <b>${hit.likes}</b>
+      <p class="info-item">
+        <b>likes</b>
+        ${hit.likes}
       </p>
-      <p class="info-item">views
-        <b>${hit.views}</b>
+      <p class="info-item">
+        <b>views</b>
+        ${hit.views}
       </p>
-      <p class="info-item">comments
-        <b>${hit.comments}</b>
+      <p class="info-item">
+        <b>comments</b>
+        ${hit.comments}
       </p>
-      <p class="info-item">downloads
-        <b>${hit.downloads}</b>
+      <p class="info-item">
+        <b>downloads</b>
+        ${hit.downloads}
       </p>
     </div>
   </div></a>`)
@@ -68,8 +72,8 @@ getData(query,page)
       total = data.totalHits;
       const length = hits.length;
       
-      console.log(total);
-      console.log(hits);
+      // console.log(total);
+      // console.log(hits);
       
     checkDataLength(length,total)
      
@@ -98,7 +102,7 @@ function onSearchSubmit(e) {
     page = 1;
     galery.innerHTML = '';
     fetchPictures()
-   
+    console.log(galery.firstChild);
   
 }
 
@@ -142,11 +146,13 @@ function checkDataLength(itemsLength,totalAmount) {
 }
 
 
-const { height: ImageLink } = document
-  .querySelector(".gallery")
-  .firstElementChild.getBoundingClientRect();
+// const { height: cardHeight } = document
+//   .querySelector(".gallery")
+//   .firstElementChild.getBoundingClientRect();
 
-window.scrollBy({
-  top: ImageLink * 2,
-  behavior: "smooth",
-});
+ 
+
+// window.scrollBy({
+//   top: cardHeight * 2,
+//   behavior: "smooth",
+// });
