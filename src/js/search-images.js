@@ -36,7 +36,7 @@ const render = () => {
   
   const markup = hits.map((hit) => `<a class="imageLink" href="${hit.largeImageURL}"><div class="photo-card">
     <img src="${hit.webformatURL}" alt="${hit.tags}"
-    title="${hit.tags}" width="250"  loading="lazy" />
+    title="${hit.tags}" max-width="190"  loading="lazy" />
     <div class="info">
       <p class="info-item">
         <b>likes</b>
