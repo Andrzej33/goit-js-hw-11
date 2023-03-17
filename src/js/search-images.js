@@ -7,8 +7,9 @@ import Notiflix from 'notiflix';
 let page = 1;
 let hits = [];
 let query = '';
+let total =''
 
-// Налаштування опцій бібліщтеки повідомлень
+// Налаштування опцій бібліотеки повідомлень
 
 Notify.init({
   width: '200px',
