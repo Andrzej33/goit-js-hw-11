@@ -2,7 +2,7 @@ import { getData } from './api';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import Notiflix from 'notiflix';
+
 
 let page = 1;
 let hits = [];
