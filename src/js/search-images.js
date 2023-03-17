@@ -12,7 +12,7 @@ let total = '';
 // Налаштування опцій бібліотеки повідомлень
 
 Notify.init({
-  width: '200px',
+  width: '290px',
   opacity: 0.8,
   clickToClose: true,
 });
