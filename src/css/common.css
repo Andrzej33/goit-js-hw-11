@@ -14,7 +14,8 @@ body {
 
 .main-search {
   text-decoration: none;
-  font-size: x-large;
+  font-size: 34px;
+  font-weight: bold;
   padding: 50px;
   display: flex;
   color: #125c08e5;
@@ -25,7 +26,7 @@ body {
 img {
   display: block;
   /* height: 90px; */
-  height: 50%;
+  height: 60%;
 }
 
 .gallery {
@@ -58,7 +59,7 @@ img {
   margin: 0px;
   color: rgb(248, 193, 14);
   font-style: normal;
-  font-size: 10px;
+  font-size: 18px;
   line-height: 1.4;
   letter-spacing: 0.03em;
   max-width: fit-content;
