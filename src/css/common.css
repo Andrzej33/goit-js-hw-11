@@ -24,7 +24,8 @@ body {
 
 img {
   display: block;
-  height: 90px;
+  /* height: 90px; */
+  height: auto;
 }
 
 .gallery {
@@ -42,7 +43,7 @@ img {
   justify-content: space-between;
 }
 .imageLink {
-  max-height: 220px;
+  max-height: fit-content;
   display: block;
   text-decoration: none;
   width: calc((100% - 30px) / 4);
