@@ -72,6 +72,7 @@ const fetchPictures = () => {
       checkDataLength(length, total);
 
       render();
+      
     })
     .catch(error => console.log(error));
 };
@@ -95,6 +96,7 @@ function onSearchSubmit(e) {
   page = 1;
   galery.innerHTML = '';
   fetchPictures();
+  setTimeOut(() => { dueScroll()}, 700);
 }
 
 // Функція для дозавантаження контенту при кліку ні кнопку Load-More
@@ -103,6 +105,7 @@ function onBtnClick() {
   hideBtn();
   page += 1;
   fetchPictures();
+
 }
 
 function showBtn() {
@@ -132,4 +135,19 @@ function checkDataLength(itemsLength, totalAmount) {
   if (page === 1) {
     Notify.success(`Hooray! We found ${totalAmount} images.`);
   }
+}
+
+
+
+document.addEventListener('scroll', dueScroll);
+
+function dueScroll()  {
+  const { height: cardHeight } = document
+  .querySelector(".gallery")
+  .firstElementChild.getBoundingClientRect();
+
+window.scrollBy({
+  top: cardHeight * 2,
+  behavior: "smooth",
+});
 }
