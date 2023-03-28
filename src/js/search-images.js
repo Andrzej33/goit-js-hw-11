@@ -75,7 +75,9 @@ const fetchPictures = () => {
       checkDataLength(length, total);
 
       render();
-      
+      if (page > 1) {
+        scrollingPages()
+      }
     })
     .catch(error => console.log(error));
 };
@@ -109,7 +111,7 @@ function onBtnClick() {
   page += 1;
   fetchPictures();
 // setTimeOut(() => { dueScroll()}, 700);
-  document.addEventListener('scroll', dueScroll);
+  
 }
 
 function showBtn() {
@@ -143,10 +145,9 @@ function checkDataLength(itemsLength, totalAmount) {
 
 
 
-
-
-
-function dueScroll()  {
+function scrollingPages() {
+  document.addEventListener('scroll', dueScroll);
+  function dueScroll()  {
   const { height: cardHeight } = document
   .querySelector(".gallery")
   .firstElementChild.getBoundingClientRect();
@@ -156,3 +157,7 @@ window.scrollBy({
   behavior: "smooth",
 });
 }
+}
+
+
+
