@@ -25,6 +25,9 @@ hideBtn();
 
 const simpleGallery = new SimpleLightbox('.gallery a', { captionDelay: 300 });
 
+
+// document.removeEventListener('click',dueScroll)
+
 form.addEventListener('submit', onSearchSubmit);
 loadBtn.addEventListener('click', onBtnClick);
 
@@ -96,7 +99,7 @@ function onSearchSubmit(e) {
   page = 1;
   galery.innerHTML = '';
   fetchPictures();
-  setTimeOut(() => { dueScroll()}, 700);
+  
 }
 
 // Функція для дозавантаження контенту при кліку ні кнопку Load-More
@@ -105,7 +108,8 @@ function onBtnClick() {
   hideBtn();
   page += 1;
   fetchPictures();
-
+// setTimeOut(() => { dueScroll()}, 700);
+  document.addEventListener('scroll', dueScroll);
 }
 
 function showBtn() {
@@ -139,7 +143,8 @@ function checkDataLength(itemsLength, totalAmount) {
 
 
 
-document.addEventListener('scroll', dueScroll);
+
+
 
 function dueScroll()  {
   const { height: cardHeight } = document
